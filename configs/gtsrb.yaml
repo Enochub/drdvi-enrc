@@ -1,0 +1,11 @@
+dataset: gtsrb
+max_samples: 5000
+image_size: 32
+grayscale: false
+hidden_dims: [512, 128]
+embedding_dim: 16
+batch_size: 128
+drdvi_epochs: 100
+enrc_pretrain_epochs: 20
+enrc_clustering_epochs: 20
+
