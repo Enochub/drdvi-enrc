@@ -1,4 +1,4 @@
-"""Load the four ENRC benchmark datasets used by the experiments."""
+"""Load the three benchmark datasets used in the thesis experiments."""
 
 import json
 from argparse import Namespace
@@ -9,7 +9,7 @@ import yaml
 from PIL import Image
 from sklearn.preprocessing import LabelEncoder
 
-DATASET_NAMES = ("stickfigures", "cmnist", "nr_objects", "gtsrb")
+DATASET_NAMES = ("stickfigures", "cmnist", "nr_objects")
 
 
 def load_yaml(path: str | Path) -> dict:
@@ -46,15 +46,13 @@ def load_dataset(name: str, data_root: str | Path, config: dict, seed: int = 42)
         if maximum and len(data) > maximum:
             indices = np.sort(np.random.default_rng(seed).choice(len(data), maximum, replace=False))
             data = data[indices]
-        return data[:, 3:] / 255.0, data[:, :3].astype(np.int64), ["upper_body", "lower_body", "third_label"]
+        # The source file has a third label. The primary thesis evaluation
+        # follows the two-view ENRC benchmark and excludes it.
+        return data[:, 3:] / 255.0, data[:, :2].astype(np.int64), ["upper_body", "lower_body"]
     if name == "cmnist":
         paths = _subset(sorted((root / name).rglob("*.png")), maximum, seed)
         labels = [tuple(map(int, path.parent.name.split("_"))) for path in paths]
         return np.stack([_image(p, size, grayscale) for p in paths]), np.asarray(labels), ["left_digit", "right_digit"]
-    if name == "gtsrb":
-        paths = _subset(sorted((root / name / "train").rglob("*.png")), maximum, seed)
-        labels, names = _encoded([("class", [path.parent.name for path in paths])])
-        return np.stack([_image(p, size, grayscale) for p in paths]), labels, names
     if name == "nr_objects":
         base = root / name
         paths = _subset(sorted((base / "images" / "train").glob("*.png")), maximum, seed)
@@ -62,4 +60,3 @@ def load_dataset(name: str, data_root: str | Path, config: dict, seed: int = 42)
         labels, names = _encoded([(key, [obj[key] for obj in objects]) for key in ("color", "material", "shape")])
         return np.stack([_image(p, size, grayscale) for p in paths]), labels, names
     raise ValueError(f"Unsupported dataset: {name}")
-

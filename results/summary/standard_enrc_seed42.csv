@@ -1,0 +1,8 @@
+dataset,view,acc,nmi,ari,seed
+cmnist,left_digit,0.7427,0.7017,0.6007,42
+cmnist,right_digit,0.7359,0.6978,0.5778,42
+nr_objects,color,1.0000,1.0000,1.0000,42
+nr_objects,material,1.0000,1.0000,1.0000,42
+nr_objects,shape,0.7286,0.5933,0.5160,42
+stickfigures,upper_body,1.0000,1.0000,1.0000,42
+stickfigures,lower_body,1.0000,1.0000,1.0000,42

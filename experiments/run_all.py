@@ -8,7 +8,7 @@ import subprocess
 import sys
 from pathlib import Path
 
-DATASETS = ("stickfigures", "cmnist", "nr_objects", "gtsrb")
+DATASETS = ("stickfigures", "cmnist", "nr_objects")
 METHODS = ("enrc", "drdvi", "frozen", "joint", "full_joint")
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -35,7 +35,7 @@ def main() -> int:
     for dataset in args.datasets:
         config = ROOT / "configs" / f"{dataset}.yaml"
         jobs = []
-        baselines = [method for method in args.methods if method != "joint"]
+        baselines = [method for method in args.methods if method not in {"joint", "full_joint"}]
         if baselines:
             jobs.append(("baselines", ROOT / "experiments" / "frozen_drdvi_enrc.py", ["--methods", *baselines]))
         if "joint" in args.methods:

@@ -1,10 +1,10 @@
 cff-version: 1.2.0
 message: "If you use this software, please cite this repository and the ENRC and DRDVI papers listed in README.md."
-title: "DRDVI-ENRC: Joint Representation Learning and Non-Redundant Clustering"
+title: "DR-DVI Representations for Non-Redundant Clustering"
 type: software
 authors:
   - family-names: Zhou
     given-names: Enjing
 year: 2026
 license: MIT
-
+repository-code: "https://github.com/Enochub/drdvi-enrc"

@@ -1,0 +1,6 @@
+dataset,configuration,acc,nmi,ari,seeds,note
+cmnist,joint,0.4168,0.3543,0.2406,"42;43;44","means; sample standard deviations are 0.0290/0.0269/0.0319"
+nr_objects,frozen,0.3919,0.0384,0.0197,42,dataset-level view mean
+nr_objects,joint,0.3793,0.0105,0.0132,42,dataset-level view mean
+stickfigures,frozen,1.0000,1.0000,1.0000,42,dataset-level view mean
+stickfigures,joint,1.0000,1.0000,1.0000,42,dataset-level view mean

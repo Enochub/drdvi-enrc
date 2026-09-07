@@ -1,0 +1,8 @@
+dataset,method,view_or_summary,acc,nmi,ari,seed,note
+nr_objects,prototype_distance_bridge,color,0.2590,0.0905,0.0443,42,selected step 500
+nr_objects,prototype_distance_bridge,material,0.9969,0.9728,0.9876,42,selected step 500
+nr_objects,prototype_distance_bridge,shape,0.6612,0.5379,0.4768,42,selected step 500
+nr_objects,prototype_distance_bridge,mean,0.6390,0.5337,0.5029,42,selected by pseudo-label preservation
+cmnist,multiple_spectral_clustering,left_digit,,0.4059,0.2291,42,preliminary 300-sample subset
+cmnist,multiple_spectral_clustering,right_digit,,0.2755,0.1252,42,preliminary 300-sample subset
+cmnist,multiple_spectral_clustering,mean,,0.3407,0.1771,42,preliminary 300-sample subset

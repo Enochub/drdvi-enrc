@@ -17,7 +17,8 @@ def clustering_accuracy(y_true: np.ndarray, y_pred: np.ndarray) -> float:
 
 
 def matched_score_rows(method: str, labels: np.ndarray, predictions: np.ndarray,
-                       label_names: list[str]) -> list[dict]:
+                       label_names: list[str],
+                       require_equal_cluster_counts: bool = False) -> list[dict]:
     if labels.ndim == 1:
         labels = labels[:, None]
     if predictions.ndim == 1:
@@ -28,7 +29,20 @@ def matched_score_rows(method: str, labels: np.ndarray, predictions: np.ndarray,
             nmi[true_idx, pred_idx] = normalized_mutual_info_score(
                 labels[:, true_idx], predictions[:, pred_idx]
             )
-    true_indices, pred_indices = linear_sum_assignment(-nmi)
+    matching_scores = nmi.copy()
+    if require_equal_cluster_counts:
+        true_counts = [np.unique(labels[:, index]).size for index in range(labels.shape[1])]
+        predicted_counts = [np.unique(predictions[:, index]).size for index in range(predictions.shape[1])]
+        for true_idx, true_count in enumerate(true_counts):
+            for pred_idx, predicted_count in enumerate(predicted_counts):
+                if true_count != predicted_count:
+                    matching_scores[true_idx, pred_idx] = -1.0
+    true_indices, pred_indices = linear_sum_assignment(-matching_scores)
+    if require_equal_cluster_counts and any(
+        matching_scores[true_idx, pred_idx] < 0
+        for true_idx, pred_idx in zip(true_indices, pred_indices)
+    ):
+        raise ValueError("No complete view matching with equal cluster counts")
     rows = []
     for true_idx, pred_idx in zip(true_indices, pred_indices):
         truth, prediction = labels[:, true_idx], predictions[:, pred_idx]
@@ -42,4 +56,3 @@ def matched_score_rows(method: str, labels: np.ndarray, predictions: np.ndarray,
             "ARI": float(adjusted_rand_score(truth, prediction)),
         })
     return rows
-

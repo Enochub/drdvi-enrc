@@ -79,7 +79,7 @@ def run(args: argparse.Namespace) -> list[dict]:
             init="random", final_reclustering=False, device=device, random_state=args.seed,
         )
         model.fit(features)
-        rows.extend(matched_score_rows("enrc", labels, model.labels_, label_names))
+        rows.extend(matched_score_rows("enrc", labels, model.labels_, label_names, True))
 
     if {"drdvi", "frozen"}.intersection(args.methods):
         layers = [features.shape[1], *config["hidden_dims"], int(config["embedding_dim"])]
@@ -97,7 +97,7 @@ def run(args: argparse.Namespace) -> list[dict]:
                 .fit_predict(standardized)
                 for index in range(labels.shape[1])
             ])
-            rows.extend(matched_score_rows("drdvi_kmeans", labels, predictions, label_names))
+            rows.extend(matched_score_rows("drdvi_kmeans", labels, predictions, label_names, True))
 
         if "frozen" in args.methods:
             frozen = ENRC(
@@ -108,7 +108,7 @@ def run(args: argparse.Namespace) -> list[dict]:
                 init="random", final_reclustering=False, device=device, random_state=args.seed,
             )
             frozen.fit(standardized)
-            rows.extend(matched_score_rows("frozen_drdvi_enrc", labels, frozen.labels_, label_names))
+            rows.extend(matched_score_rows("frozen_drdvi_enrc", labels, frozen.labels_, label_names, True))
 
     for row in rows:
         row["dataset"] = name

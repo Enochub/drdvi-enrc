@@ -1,0 +1,15 @@
+dataset,method,view,predicted_clusters,acc,nmi,ari,seed
+cmnist,nrkmeans,left_digit,10,0.4993,0.5339,0.3643,42
+cmnist,nrkmeans,right_digit,10,0.5097,0.5257,0.3622,42
+cmnist,nrdipmeans,left_digit,5,0.3607,0.3921,0.2422,42
+cmnist,nrdipmeans,right_digit,9,0.4842,0.4958,0.3360,42
+nr_objects,nrkmeans,color,6,0.3659,0.2315,0.1486,42
+nr_objects,nrkmeans,material,2,0.5336,0.0035,0.0044,42
+nr_objects,nrkmeans,shape,3,0.9743,0.8965,0.9247,42
+nr_objects,nrdipmeans,color,2,0.3326,0.2123,0.1360,42
+nr_objects,nrdipmeans,material,2,0.9474,0.7042,0.8006,42
+nr_objects,nrdipmeans,shape,2,0.6611,0.5916,0.5082,42
+stickfigures,nrkmeans,upper_body,3,1.0000,1.0000,1.0000,42
+stickfigures,nrkmeans,lower_body,3,1.0000,1.0000,1.0000,42
+stickfigures,nrdipmeans,upper_body,17,0.2422,0.5632,0.2350,42
+stickfigures,nrdipmeans,lower_body,3,0.5544,0.6535,0.4576,42

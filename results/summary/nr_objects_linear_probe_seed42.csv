@@ -1,0 +1,7 @@
+representation,factor,accuracy,seed,analysis
+drdvi_backbone,color,0.9925,42,post_hoc_linear_probe
+drdvi_backbone,material,1.0000,42,post_hoc_linear_probe
+drdvi_backbone,shape,1.0000,42,post_hoc_linear_probe
+drdvi_bottleneck,color,0.7180,42,post_hoc_linear_probe
+drdvi_bottleneck,material,1.0000,42,post_hoc_linear_probe
+drdvi_bottleneck,shape,0.9995,42,post_hoc_linear_probe

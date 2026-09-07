@@ -1,5 +1,5 @@
 dataset: cmnist
-max_samples: 5000
+max_samples: null
 image_size: 56
 grayscale: true
 hidden_dims: [512, 128]
@@ -8,4 +8,3 @@ batch_size: 128
 drdvi_epochs: 100
 enrc_pretrain_epochs: 20
 enrc_clustering_epochs: 20
-

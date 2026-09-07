@@ -152,7 +152,7 @@ def train(args: argparse.Namespace) -> list[dict]:
             predictions.append(module.predict(model.encode(batch.to(device)), use_P=True))
     predictions = np.vstack(predictions)
     rows = [{"dataset": dataset_name, **row} for row in matched_score_rows(
-        "joint_drdvi_enrc", labels, predictions, label_names
+        "joint_drdvi_enrc", labels, predictions, label_names, True
     )]
     output = Path(args.out_dir)
     output.mkdir(parents=True, exist_ok=True)

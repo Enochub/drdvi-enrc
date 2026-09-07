@@ -50,7 +50,9 @@ def run(args: argparse.Namespace) -> list[dict]:
         random_state=args.seed, debug=args.debug,
     )
     model.fit(features)
-    rows = matched_score_rows("joint_full_drdvi_enrc", labels, model.labels_, label_names)
+    rows = matched_score_rows(
+        "joint_full_drdvi_enrc", labels, model.labels_, label_names, True
+    )
     rows = [{"dataset": name, **row} for row in rows]
     output = Path(args.out_dir) / "summary_scores.csv"
     output.parent.mkdir(parents=True, exist_ok=True)
